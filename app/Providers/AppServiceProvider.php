@@ -2,9 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\ColorPalette;
-use App\Observers\ColorPaletteObserver;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,8 +18,11 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot()
+    public function boot(): void
     {
-        ColorPalette::observe(ColorPaletteObserver::class);
+        // Paksa HTTPS di lingkungan production (Vercel)
+        if (config('app.env') === 'production' || env('VERCEL_URL')) {
+            URL::forceScheme('https');
+        }
     }
 }
