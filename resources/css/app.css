@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.color-input::placeholder {
+    color: theme('colors.gray.400');
+}
+
+.transition-palette {
+    transition: all 0.3s ease;
+}
